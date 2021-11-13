@@ -6,7 +6,7 @@ import com.ppzeff.dehssisfs.LOTO.payload.UploadFileResponse;
 import com.ppzeff.dehssisfs.LOTO.repository.LOTONdRepository;
 import com.ppzeff.dehssisfs.LOTO.repository.WorkSitesRepository;
 import com.ppzeff.dehssisfs.LOTO.service.FileStorageService;
-import com.ppzeff.dehssisfs.LOTO.service.sendHtmlEmailService;
+import com.ppzeff.dehssisfs.LOTO.service.SendEmailServiceThymeleafImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.mail.MessagingException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,7 +28,7 @@ public class LotoController {
     @Autowired
     private FileStorageService fileStorageService;
     @Autowired
-    private sendHtmlEmailService emailSender;
+    private SendEmailServiceThymeleafImp emailSender;
     @Autowired
     private WorkSitesRepository workSitesRepository;
 
@@ -110,10 +109,10 @@ public class LotoController {
         lotoNdRepository.save(lotoNdModel);
 
         try {
-            emailSender.sendHtmlEmail(lotoNdModel, fileStorageService.loadFileAsResource(fileName).getFile().getAbsolutePath());
+            emailSender.sendEmail(lotoNdModel, fileStorageService.loadFileAsResource(fileName).getFile().getAbsolutePath());
 //            emailSender.sendThymeleafEmail(lotoNd,fileStorageService.loadFileAsResource(fileName).getFile().getAbsolutePath());
 
-        } catch (MessagingException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
