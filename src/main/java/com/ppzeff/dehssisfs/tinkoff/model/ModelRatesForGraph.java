@@ -2,7 +2,7 @@ package com.ppzeff.dehssisfs.tinkoff.model;
 
 import java.util.Date;
 
-public class ModelRatesForGraph {
+public class ModelRatesForGraph implements Comparable<ModelRatesForGraph>{
 private Date date;
 private Double rateBuy;
 private Double rateSell;
@@ -39,5 +39,10 @@ private Double rateSell;
 
     public void setRateSell(Double rateSell) {
         this.rateSell = rateSell;
+    }
+
+    @Override
+    public int compareTo(ModelRatesForGraph o) {
+        return this.getDate().compareTo(o.getDate());
     }
 }

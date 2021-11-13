@@ -26,11 +26,16 @@ public class MakeGraphServiceImp implements MakeGraphService{
 
     public String makeGraph(int code, long period) {
 
-        List<ModelRatesForGraph> list = modelService.getRatesByData(code, period);
+
 
         List<Date> xData = new ArrayList<>();
         List<Double> yData = new ArrayList<>();
         List<Double> zData = new ArrayList<>();
+
+        List<ModelRatesForGraph> list = modelService.getRatesByData(code, period);
+
+        // сортируем по дате
+       list.sort(ModelRatesForGraph::compareTo);
 
         for (ModelRatesForGraph el : list) {
             xData.add(el.getDate());
