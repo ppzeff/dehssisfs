@@ -1,6 +1,6 @@
 package com.ppzeff.dehssisfs.tinkoff.service;
 
-import com.ppzeff.dehssisfs.tinkoff.Config.BotConfig;
+import com.ppzeff.dehssisfs.tinkoff.config.BotConfig;
 import com.ppzeff.dehssisfs.tinkoff.model.Model;
 import com.ppzeff.dehssisfs.tinkoff.model.TelegramUser;
 import com.ppzeff.dehssisfs.tinkoff.repo.TelegramUserRepo;
@@ -49,6 +49,17 @@ public class BotService extends TelegramLongPollingBot {
         SendMessage.SendMessageBuilder messageBuilder = SendMessage.builder();
         String messageText;
         String chatId;
+        if(update.hasCallbackQuery()){
+            System.out.println(update.getCallbackQuery().getData());
+            return;
+//            try {
+//                execute(new SendMessage().setText(
+//                        update.getCallbackQuery().getData())
+//                        .setChatId(update.getCallbackQuery().getMessage().getChatId()));
+//            } catch (TelegramApiException e) {
+//                e.printStackTrace();
+//            }
+        }
         if (update.getMessage() != null && update.getMessage().hasText()) {
 
             TelegramUser telegramUser = new TelegramUser(
@@ -68,7 +79,9 @@ public class BotService extends TelegramLongPollingBot {
             messageBuilder.chatId(chatId);
             messageBuilder.parseMode(ParseMode.HTML);
             messageText = update.getMessage().getText();
-        } else {
+        }
+
+        else {
             chatId = update.getChannelPost().getChatId().toString();
             messageBuilder.chatId(chatId);
             messageText = update.getChannelPost().getText();
@@ -149,6 +162,7 @@ public class BotService extends TelegramLongPollingBot {
             rates = rates.concat(model.toTeleString());
 
             messageBuilder.text(rates);
+            messageBuilder.replyMarkup(new KeyboardMarkup().kb());
 
             try {
                 execute(messageBuilder.build());
@@ -160,6 +174,7 @@ public class BotService extends TelegramLongPollingBot {
         if (messageText.contains("/chartId")) {
             messageBuilder.text("ID Канала : <b>" + chatId + "</b>");
             try {
+//                messageBuilder.
                 execute(messageBuilder.build());
             } catch (TelegramApiException e) {
                 System.out.println(e.toString());

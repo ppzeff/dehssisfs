@@ -1,4 +1,4 @@
-package com.ppzeff.dehssisfs.tinkoff.Config;
+package com.ppzeff.dehssisfs.tinkoff.config;
 
 import com.ppzeff.dehssisfs.tinkoff.service.BotService;
 import org.springframework.beans.factory.annotation.Autowired;

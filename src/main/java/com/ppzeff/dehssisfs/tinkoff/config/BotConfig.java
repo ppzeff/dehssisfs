@@ -1,4 +1,4 @@
-package com.ppzeff.dehssisfs.tinkoff.Config;
+package com.ppzeff.dehssisfs.tinkoff.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

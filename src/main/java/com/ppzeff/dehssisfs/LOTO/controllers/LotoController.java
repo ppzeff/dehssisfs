@@ -38,21 +38,6 @@ public class LotoController {
     @GetMapping("/workpermit/loto")
     public String home(Model model) {
         model.addAttribute("title", "Safety_LOTO_ND");
-//        workSitesRepository.save(new WorkSites("Фасовка"));
-//        workSitesRepository.save(new WorkSites("Процесс"));
-//        workSitesRepository.save(new WorkSites("Склад ЗЧ"));
-//        workSitesRepository.save(new WorkSites("Электрика"));//
-//        workSitesRepository.save(new WorkSites("Территория"));
-//        workSitesRepository.save(new WorkSites("ССиМ"));
-//        workSitesRepository.save(new WorkSites("СГП"));
-//        workSitesRepository.save(new WorkSites("Пилотный завод"));//
-//        workSitesRepository.save(new WorkSites("Очистные сооружения"));
-//        workSitesRepository.save(new WorkSites("Лаборатория физхим"));
-//        workSitesRepository.save(new WorkSites("Копакер"));
-//        workSitesRepository.save(new WorkSites("Лаборатория микроб"));
-//        workSitesRepository.save(new WorkSites("Котельная"));
-//        workSitesRepository.save(new WorkSites("АХУ"));
-
         Iterable<WorkSitesModel> workSites = workSitesRepository.findAll();
         model.addAttribute("workSites", workSites);
 
@@ -116,6 +101,7 @@ public class LotoController {
             e.printStackTrace();
         }
 
+        model.addAttribute("lotoNdModel", lotoNdModel);
         model.addAttribute("title", "Safety_LOTO_ND");
         model.addAttribute("id", lotoNdModel.getId());
         model.addAttribute("fileDownloadUri", fileDownloadUri);
