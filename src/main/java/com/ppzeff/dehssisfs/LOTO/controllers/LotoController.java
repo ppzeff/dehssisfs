@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Controller
 public class LotoController {
@@ -39,7 +40,10 @@ public class LotoController {
     public String home(Model model) {
         model.addAttribute("title", "Safety_LOTO_ND");
         Iterable<WorkSitesModel> workSites = workSitesRepository.findAll();
+        List<String> specialistFIO = lotoNdRepository.findAllspecialistFIO();
         model.addAttribute("workSites", workSites);
+        model.addAttribute("specialistFIO", specialistFIO);
+
 
         return "lototemplate";
     }
