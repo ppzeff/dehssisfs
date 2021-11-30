@@ -20,12 +20,12 @@
 <header th:insert="blocks/header :: header " ></header>
 <main>
     <div class="container col-xl-8 col-lg-10 col-sm-12">
-        <th:block th:object="lotoNdModel">
-        <p class="h3 my-3 text-center" th:text="'LOTO ND зарегистрирован под номером '+*{id}">LOTO ND зарегистрирован под номером </p>
+        <th:block th:object="${lotoNdModel}">
+        <p class="h3 my-3 text-center" th:text="'LOTO ND зарегистрирован под номером '+*{id} + ', '+*{someDate}">LOTO ND зарегистрирован под номером </p>
 <!--        <p class="h3 my-3 text-center" th:text="${fileDownloadUri}">LOTO ND зарегистрирован под номером </p>-->
 <!--<img class="rounded mx-auto d-block" th:src="${fileDownloadUri}"  alt="...">-->
 
-            <p class="h4 my-4" th:text="'' +*{id}" ></p>
+<!--            <p class="h4 my-4" th:text="'' +*{id}" ></p>-->
         </th:block>
         <div class="row align-items-center">
             <img th:src="${fileDownloadUri}" alt="..." class="img-fluid">

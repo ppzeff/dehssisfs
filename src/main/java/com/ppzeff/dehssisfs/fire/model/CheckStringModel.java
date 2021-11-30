@@ -1,34 +1,30 @@
 package com.ppzeff.dehssisfs.fire.model;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.sql.Date;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "fire_check_string")
 public class CheckStringModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String data;
+    private Date checkDate;
+    private String condition;
+    private Double mass;
+    private Double pressure;
+    private String condition2;
+    private String mery;
+    private String FIO;
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
 }

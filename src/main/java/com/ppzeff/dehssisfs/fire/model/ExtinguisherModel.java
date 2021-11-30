@@ -1,31 +1,34 @@
 package com.ppzeff.dehssisfs.fire.model;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "fire_extinguisher")
 public class ExtinguisherModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    Long id;
 
     @Column(name = "number")
-    int number;
+    Integer number;
 
     @Column(name = "date_start")
     Date date;
 
-//    @Column(name = "installation_location")
-//    @ManyToOne
-//    CompartmentModel compartment;
+    @Column(name = "installation_location")
+    String compartment;
 
     @Column(name = "type")
     String type;
@@ -42,9 +45,11 @@ public class ExtinguisherModel {
     @Column(name = "substance_brand")
     String substanceBrand;
 
-    @Column(name = "check_string")
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<CheckStringModel> listCheckString;
 
-
+    public void addcheckstring(CheckStringModel checkString) {
+        //  checkString.setId(listCheckString.size() + 1);
+        listCheckString.add(checkString);
+    }
 }

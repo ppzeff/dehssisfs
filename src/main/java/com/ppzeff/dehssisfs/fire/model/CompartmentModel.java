@@ -1,6 +1,7 @@
-//package com.ppzeff.dehssisfs.fire.model;
+package com.ppzeff.dehssisfs.fire.model;//package com.ppzeff.dehssisfs.fire.model;
 //
 //import lombok.Data;
+//import lombok.Getter;
 //import lombok.NoArgsConstructor;
 //
 //import javax.persistence.*;
