@@ -148,6 +148,25 @@ public class BotService extends TelegramLongPollingBot {
 
         }
 
+        if (messageText.contains("/all840")) {
+
+            long start = System.currentTimeMillis();
+            long period = start - 1638053234380L;
+            String fileName = makeGraphService.makeGraph(840,period)+".jpg";
+            SendPhoto photo = new SendPhoto();
+            photo.setChatId(chatId);
+            photo.setPhoto(new InputFile(new File(fileName)));
+            photo.setCaption("График сформирован за: " +  (System.currentTimeMillis()-start) + "милисекунд");
+            try {
+                execute(photo);
+                new File(fileName).delete();
+//                execute(messageBuilder.build());
+            } catch (TelegramApiException e) {
+                System.out.println(e.toString());
+            }
+
+        }
+
         if (messageText.contains("/rates")) {
             Model model = mainService.cashModelMap.get(840);
             String rates = "Текущий курс: \n";

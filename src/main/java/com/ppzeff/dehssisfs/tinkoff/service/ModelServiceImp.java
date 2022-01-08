@@ -33,7 +33,7 @@ public class ModelServiceImp implements ModelService {
     public List<ModelRatesForGraph> getRatesByData(int code, long period) {
 //        List<Model> allByCode = modelRepo.findAllByCode(code);
         Date now = new Date();
-        List<Model> allByCode = modelRepo.findAll(code, now.getTime() - period, now.getTime());
+        List<Model> allByCode = modelRepo.findByPeriod(code, now.getTime() - period, now.getTime());
 
         List<ModelRatesForGraph> list = new ArrayList<>();
         Date date = new Date();

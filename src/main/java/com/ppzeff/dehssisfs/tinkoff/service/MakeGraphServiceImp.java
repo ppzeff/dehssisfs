@@ -37,7 +37,18 @@ public class MakeGraphServiceImp implements MakeGraphService{
         // сортируем по дате
        list.sort(ModelRatesForGraph::compareTo);
 
-        for (ModelRatesForGraph el : list) {
+        // чистим от данных (пиков)
+        List<ModelRatesForGraph> list2= new ArrayList<>();
+        double lastBuy=list.get(0).getRateBuy();
+        double lastSell=list.get(0).getRateSell();
+
+        for ( ModelRatesForGraph el: list) {
+            if ((el.getRateSell()-lastSell)<(lastSell*0.005)){
+                list2.add(el);
+            }
+        }
+
+        for (ModelRatesForGraph el : list2) {
             xData.add(el.getDate());
             yData.add(el.getRateBuy());
             zData.add(el.getRateSell());
@@ -53,7 +64,7 @@ public class MakeGraphServiceImp implements MakeGraphService{
         chart.getStyler().setLegendVisible(false);
         chart.getStyler().setCursorLineWidth(2f);
         chart.getStyler().setLegendVisible(true);
-        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNE);
+        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideSW);
 
 //        chart.getStyler().setDatePattern("dd-MMM");
 
