@@ -43,7 +43,7 @@ public class MakeGraphServiceImp implements MakeGraphService{
         double lastSell=list.get(0).getRateSell();
 
         for ( ModelRatesForGraph el: list) {
-            if ((el.getRateSell()-lastSell)<(lastSell*0.005)){
+            if ((el.getRateSell()-lastSell)<(lastSell*0.01)){
                 list2.add(el);
             }
         }
