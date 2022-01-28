@@ -113,6 +113,14 @@ public class FireController {
         return "Ok";
     }
 
+    @ResponseBody
+    @GetMapping("/test")
+    public String test(){
+        System.out.println("TEST!!!");
+        return "Ok";
+    }
+
+
 }
 
 
