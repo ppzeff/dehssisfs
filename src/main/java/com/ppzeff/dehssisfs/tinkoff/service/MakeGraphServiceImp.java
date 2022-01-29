@@ -48,7 +48,7 @@ public class MakeGraphServiceImp implements MakeGraphService{
             }
         }
 
-        for (ModelRatesForGraph el : list2) {
+        for (ModelRatesForGraph el : list) {
             xData.add(el.getDate());
             yData.add(el.getRateBuy());
             zData.add(el.getRateSell());
