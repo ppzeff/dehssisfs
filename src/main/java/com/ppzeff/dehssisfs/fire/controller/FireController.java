@@ -115,8 +115,15 @@ public class FireController {
 
     @ResponseBody
     @GetMapping("/test")
-    public String test(){
-        System.out.println("TEST!!!");
+    public String testGet(){
+        System.out.println("Get TEST!!!");
+        return "Ok";
+    }
+
+    @ResponseBody
+    @PostMapping("/test")
+    public String testPost(){
+        System.out.println("Post TEST!!!");
         return "Ok";
     }
 
