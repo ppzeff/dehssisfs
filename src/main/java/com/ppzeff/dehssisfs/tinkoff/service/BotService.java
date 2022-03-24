@@ -3,7 +3,9 @@ package com.ppzeff.dehssisfs.tinkoff.service;
 import com.ppzeff.dehssisfs.tinkoff.config.BotConfig;
 import com.ppzeff.dehssisfs.tinkoff.model.Model;
 import com.ppzeff.dehssisfs.tinkoff.model.TelegramUser;
+import com.ppzeff.dehssisfs.tinkoff.model.UserActions;
 import com.ppzeff.dehssisfs.tinkoff.repo.TelegramUserRepo;
+import com.ppzeff.dehssisfs.tinkoff.repo.UserActionsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -35,6 +37,9 @@ public class BotService extends TelegramLongPollingBot {
 
     @Autowired
     MainService mainService;
+
+    @Autowired
+    UserActionsRepo userActionsRepo;
 
     @Autowired
     MakeGraphServiceImp makeGraphService;
@@ -79,6 +84,13 @@ public class BotService extends TelegramLongPollingBot {
             messageBuilder.chatId(chatId);
             messageBuilder.parseMode(ParseMode.HTML);
             messageText = update.getMessage().getText();
+
+            UserActions userActions = new UserActions();
+            userActions.setUserId(telegramUser.getUserId());
+            userActions.setMessage(messageText);
+            userActions.setDtQuery(new Date());
+            userActionsRepo.save(userActions);
+
         }
 
         else {
