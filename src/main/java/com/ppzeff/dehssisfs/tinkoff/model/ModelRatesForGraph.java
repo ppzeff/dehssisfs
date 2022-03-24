@@ -8,8 +8,6 @@ private Double rateBuy;
 private Double rateSell;
 
 
-    public ModelRatesForGraph() {
-    }
 
     public ModelRatesForGraph(Date date, Double rateBuy, Double rateSell) {
         this.date = date;

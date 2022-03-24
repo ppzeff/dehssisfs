@@ -1,5 +1,6 @@
 package com.ppzeff.dehssisfs.tinkoff.service;
 
+import com.ppzeff.dehssisfs.tinkoff.model.Model;
 import com.ppzeff.dehssisfs.tinkoff.model.ModelRatesForGraph;
 import org.knowm.xchart.BitmapEncoder;
 import org.knowm.xchart.XYChart;
@@ -19,13 +20,12 @@ import java.util.Random;
 
 
 @Component
-public class MakeGraphServiceImp implements MakeGraphService{
+public class MakeGraphServiceImp implements MakeGraphService {
 
     @Autowired
     ModelServiceImp modelService;
 
     public String makeGraph(int code, long period) {
-
 
 
         List<Date> xData = new ArrayList<>();
@@ -34,19 +34,40 @@ public class MakeGraphServiceImp implements MakeGraphService{
 
         List<ModelRatesForGraph> list = modelService.getRatesByData(code, period);
 
+        Model model = MainService.getСurrentRate(code);
+        if (list.isEmpty()){
+            list.add(new ModelRatesForGraph(new Date(new Date().getTime()-period),model.getRateRUB(), model.getRateVal()));
+//            list.add(new ModelRatesForGraph(new Date(), model.getRateRUB(), model.getRateVal()));
+
+        }
+
+        ModelRatesForGraph mg = new ModelRatesForGraph(new Date(), model.getRateRUB(), model.getRateVal());
+        list.add(mg);
+
         // сортируем по дате
-       list.sort(ModelRatesForGraph::compareTo);
+        list.sort(ModelRatesForGraph::compareTo);
 
         // чистим от данных (пиков)
-        List<ModelRatesForGraph> list2= new ArrayList<>();
-        double lastBuy=list.get(0).getRateBuy();
-        double lastSell=list.get(0).getRateSell();
+//        List<ModelRatesForGraph> list2 = new ArrayList<>();
+//        double lastBuy = list.get(0).getRateBuy();
+//        double lastSell = list.get(0).getRateSell();
+//
+//        for (ModelRatesForGraph el : list) {
+//            if ((el.getRateSell() - lastSell) < (lastSell * 0.01)) {
+//                list2.add(el);
+//            }
+//        }
 
-        for ( ModelRatesForGraph el: list) {
-            if ((el.getRateSell()-lastSell)<(lastSell*0.01)){
-                list2.add(el);
-            }
-        }
+        // чистим от данных (пиков)
+//        List<ModelRatesForGraph> list2= new ArrayList<>();
+//        double lastBuy=list.get(0).getRateBuy();
+//        double lastSell=list.get(0).getRateSell();
+//
+//        for ( ModelRatesForGraph el: list) {
+//            if ((el.getRateSell()-lastSell)<(lastSell*0.01)){
+//                list2.add(el);
+//            }
+//        }
 
         for (ModelRatesForGraph el : list) {
             xData.add(el.getDate());
@@ -80,13 +101,13 @@ public class MakeGraphServiceImp implements MakeGraphService{
         seriesSell.setMarker(SeriesMarkers.NONE);
 //        seriesSell.setShowInLegend(true);
 
-        String fileName = givenUsingJava8_whenGeneratingRandomAlphabeticString_thenCorrect(6)+ "_" + code + "_150DPI";
+        String fileName = givenUsingJava8_whenGeneratingRandomAlphabeticString_thenCorrect(6) + "_" + code + "_150DPI";
 
         try {
             byte[] bitmapBytes = BitmapEncoder.getBitmapBytes(chart, BitmapEncoder.BitmapFormat.JPG);
 
 //            Files.write(Paths.get("txt.jpg"), bitmapBytes);
-            BitmapEncoder.saveBitmapWithDPI(chart, fileName , BitmapEncoder.BitmapFormat.JPG, 150);
+            BitmapEncoder.saveBitmapWithDPI(chart, fileName, BitmapEncoder.BitmapFormat.JPG, 150);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package com.ppzeff.dehssisfs.tinkoff.service;
 
+import com.fasterxml.classmate.Annotations;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ppzeff.dehssisfs.tinkoff.model.JsonModel;
 import com.ppzeff.dehssisfs.tinkoff.model.Model;
@@ -32,7 +33,7 @@ public class MainService {
     @Autowired
     JsonModelRepo jsonModelRepo;
 
-    Map<Integer, Model> cashModelMap = new HashMap<>();
+  public static Map<Integer, Model> cashModelMap = new HashMap<>();
 
 
     public List<Model> getRateByCode(List<Integer> codeList) throws IOException {
@@ -132,5 +133,9 @@ public class MainService {
             }
         }
         return null;
+    }
+
+    public static Model getСurrentRate(int code) {
+        return cashModelMap.get(code);
     }
 }

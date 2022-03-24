@@ -181,7 +181,7 @@ public class BotService extends TelegramLongPollingBot {
             rates = rates.concat(model.toTeleString());
 
             messageBuilder.text(rates);
-            messageBuilder.replyMarkup(new KeyboardMarkup().kb());
+//            messageBuilder.replyMarkup(new KeyboardMarkup().kb());
 
             try {
                 execute(messageBuilder.build());
