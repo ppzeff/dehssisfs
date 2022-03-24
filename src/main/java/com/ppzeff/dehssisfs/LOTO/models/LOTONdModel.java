@@ -29,7 +29,7 @@ public class LOTONdModel {
         this.workSite = workSite;
         this.fotoName = fotoName;
         this.dataStart=dataStart;
-        this.someDate = new Timestamp(System.currentTimeMillis());
+        this.someDate = new Timestamp(new Date().getTime());
     }
 
     public long getId() {

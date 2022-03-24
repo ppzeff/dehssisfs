@@ -2,6 +2,7 @@ package com.ppzeff.dehssisfs.LOTO.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "dev_waste_shift_report")
@@ -48,7 +49,7 @@ public class WasteShiftReportModel {
         this.thirdFoto = thirdFoto;
         this.fourthFoto = fourthFoto;
         this.shiftDay = shiftDay;
-        this.reportDate = new Timestamp(System.currentTimeMillis());
+        this.reportDate = new Timestamp(new Date().getTime());
     }
 
     @Override
